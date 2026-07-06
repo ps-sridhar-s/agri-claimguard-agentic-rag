@@ -1,65 +1,56 @@
 from pathlib import Path
 import re
+import os
+from dotenv import load_dotenv
 
-# Folder path
-DATA_FOLDER = Path(
-    r"C:\Users\SridharS\Downloads\Sridhar_Project\agri-claimguard-agentic-rag\data_source"
-)
+load_dotenv()
+
 
 def clean_filename(filename: str) -> str:
-    """
-    Cleans the filename by:
-    - Replacing spaces with underscores
-    - Removing unwanted special characters
-    - Preserving file extension
-    """
-
     file_path = Path(filename)
 
     stem = file_path.stem
-    suffix = file_path.suffix
+    suffix = file_path.suffix.lower()
 
-    # Replace spaces with underscores
     stem = stem.replace(" ", "_")
-
-    # Remove unwanted characters
-    # Keeps only letters, numbers, underscores, and hyphens
     stem = re.sub(r"[^a-zA-Z0-9_-]", "", stem)
-
-    # Replace multiple underscores with single underscore
     stem = re.sub(r"_+", "_", stem)
 
-    return f"{stem}{suffix.lower()}"
+    return f"{stem}{suffix}"
 
 
-def rename_files(folder: Path):
+def rename_files() -> list[Path]:
+    folder = Path(os.environ["folder_path"])
+
     if not folder.exists():
-        print(f"Folder does not exist: {folder}")
-        return
+        raise FileNotFoundError(f"Folder does not exist: {folder}")
+
+    file_paths: list[Path] = []
 
     for file in folder.rglob("*"):
-        if file.is_file():
+        if not file.is_file():
+            continue
 
-            new_name = clean_filename(file.name)
+        new_name = clean_filename(file.name)
 
-            if file.name != new_name:
-                new_path = file.parent / new_name
+        # Already valid
+        if file.name == new_name:
+            file_paths.append(file)
+            continue
 
-                # Handle duplicate names
-                counter = 1
-                while new_path.exists():
-                    new_name = (
-                        f"{Path(new_name).stem}_{counter}"
-                        f"{Path(new_name).suffix}"
-                    )
-                    new_path = file.parent / new_name
-                    counter += 1
+        new_path = file.parent / new_name
 
-                print(f"Renaming:\n{file.name}\n -> {new_path.name}\n")
+        # Prevent duplicate names
+        counter = 1
+        while new_path.exists():
+            new_path = file.parent / f"{new_path.stem}_{counter}{new_path.suffix}"
+            counter += 1
 
-                file.rename(new_path)
+        print(f"Renaming:\n{file.name}\n -> {new_path.name}\n")
 
-    print("✅ File renaming completed.")
+        file.rename(new_path)
 
+        # Append the NEW path after renaming
+        file_paths.append(new_path)
 
-
+    return file_paths

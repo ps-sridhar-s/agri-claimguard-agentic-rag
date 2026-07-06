@@ -6,6 +6,3 @@ def document_loader(file_path):
     return docs
 
 
-# if __name__ == "__main__":
-#     document = document_loader(file_path=Path("C:/Users/SridharS/Downloads/Sridhar_Project/agri-claimguard-agentic-rag/data_source/NAIS_SCHEME.pdf"))
-#     print(document)
