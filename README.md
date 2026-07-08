@@ -1,5 +1,5 @@
-<img width="1536" height="1024" alt="Agri_Architecture" src="https://github.com/user-attachments/assets/0e39c7ff-24d2-4a6a-b1a9-a590edfa13d8" />
 
+<img width="1672" height="941" alt="agri-claimguard-ai-hero" src="https://github.com/user-attachments/assets/225783f4-5bea-4c3a-80f8-4a23b1694497" />
 
 # Agri ClaimGuard AI
 
@@ -30,7 +30,7 @@ Agentic RAG platform for crop insurance claim assessment. The project combines a
 |-- requirements.txt         # Python dependencies
 `-- README.md
 ```
-
+<img width="1536" height="1024" alt="Agri_Architecture" src="https://github.com/user-attachments/assets/0e39c7ff-24d2-4a6a-b1a9-a590edfa13d8" />
 ## Prerequisites
 
 - Python 3.11+ recommended.
