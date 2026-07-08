@@ -62,24 +62,48 @@ def chunking_node(state: Rag_State):
 
 
 def vector_store_node(state: Rag_State):
-    chunks=state["chunks"]
     log_node("vector_store_node", state)
-    vector_store=chunk_vector_store(chunks)
-    return {"vector_store": vector_store}
 
+    try:
+        chunks = state["chunks"]
+
+        print(f"Total Chunks : {len(chunks)}")
+
+        vector_store = chunk_vector_store(chunks)
+
+        print("Vector Store Created Successfully")
+
+        return {
+            "vector_store": vector_store
+        }
+
+    except Exception as e:
+        print("Vector Store Error")
+        print(e)
+        raise
 
 
 
 def bm25_index_node(state: Rag_State):
-    chunks=state["chunks"]
-    bm25_index=create_bm25_index(chunks)
-    return {"bm25_index": bm25_index}
+    log_node("bm25_index_node", state)
 
+    try:
+        bm25 = create_bm25_index(state["chunks"])
+
+        print("BM25 Created Successfully")
+
+        return {
+            "bm25_index": bm25
+        }
+
+    except Exception as e:
+        print(e)
+        raise
 
 def hybrid_retriever_node(state: Rag_State):
     vector_store=state["vector_store"]
     bm25_index=state["bm25_index"]
-    results=hybrid_retriever(vector_store,bm25_index,state["query"])
+    results=hybrid_retriever(state["query"])
     return {"retriever": results}
 
 
@@ -141,12 +165,12 @@ rag_graph.add_edge(
 )
 
 rag_graph.add_edge(
-    "chunking",
+    "vector_store",
     "bm25_index"
 )
 
 rag_graph.add_edge(
-    "vector_store",
+    "bm25_index",
     "hybrid_retriever"
 )
 

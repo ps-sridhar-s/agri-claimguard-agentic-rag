@@ -1,11 +1,25 @@
 from langchain_nvidia_ai_endpoints import NVIDIAEmbeddings
-import os
+from langchain_ollama import OllamaEmbeddings
 from dotenv import load_dotenv
+import os
 load_dotenv()
-embedding_client = NVIDIAEmbeddings(
-  model=os.environ.get("nvidia_embedding_model"), 
-  api_key=os.environ.get("nvidia_embedding_key"), 
-  truncate="NONE", 
-  )
+
+
+
+
+def get_embedding_client():
+    embedding_client =  OllamaEmbeddings(
+    model="mxbai-embed-large",
+    base_url="http://localhost:11434")
+    
+    return embedding_client
+
+
+
+
+
+embedding_client = get_embedding_client()
+
+
 
 

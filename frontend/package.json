@@ -1,0 +1,26 @@
+{
+  "name": "agriclaimguard-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "axios": "1.6.3",
+    "three": "0.161.0",
+    "@react-three/fiber": "8.13.1",
+    "@react-three/drei": "9.65.2",
+    "framer-motion": "10.12.16"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2",
+    "vite": "5.3.1",
+    "@vitejs/plugin-react": "4.3.2",
+    "@types/react": "18.2.28",
+    "@types/react-dom": "18.2.11"
+  }
+}

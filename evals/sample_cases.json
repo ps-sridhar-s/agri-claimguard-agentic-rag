@@ -1,0 +1,30 @@
+[
+  {
+    "id": "drought-groundnut-anantapur",
+    "claim": {
+      "farmer_name": "Ram",
+      "district": "Anantapur",
+      "crop": "Groundnut",
+      "date_of_loss": "2025-08-15",
+      "loss_reason": "Drought",
+      "policy_id": "PMFBY-2025",
+      "query": "What is the eligibility for drought compensation?"
+    },
+    "expected_recommendation": "Needs Review",
+    "expected_sources": ["Operational_Guidelines", "NAIS"],
+    "expected_keywords": ["drought", "loss", "claim", "insurance"],
+    "require_human_review": true
+  },
+  {
+    "id": "missing-policy-review",
+    "claim": {
+      "district": "Kurnool",
+      "crop": "Cotton",
+      "loss_reason": "Flood",
+      "query": "Assess this flood-related crop insurance claim."
+    },
+    "expected_recommendation": "Needs Review",
+    "expected_keywords": ["claim", "loss"],
+    "require_human_review": true
+  }
+]
