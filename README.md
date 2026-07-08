@@ -1,3 +1,6 @@
+<img width="1536" height="1024" alt="Agri_Architecture" src="https://github.com/user-attachments/assets/0e39c7ff-24d2-4a6a-b1a9-a590edfa13d8" />
+
+
 # Agri ClaimGuard AI
 
 Agentic RAG platform for crop insurance claim assessment. The project combines a FastAPI backend, LangGraph-style agents, hybrid retrieval, deterministic evaluation, and a premium 3D React frontend for claim review workflows.
